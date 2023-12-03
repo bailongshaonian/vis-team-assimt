@@ -1,85 +1,90 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import {ref} from 'vue'
+// import HelloWorld from './components/HelloWorld.vue'
+const textTip = ref('构思草图。\n从左侧查看对应模块')
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <RouterView>
+    <el-container class="Container" width="100vw" height="100vh">
+      <el-aside class="AsideContainer" width="20vw">
+        <el-menu
+          class="Menu"
+          :collapse="true"
+        >
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
+          <el-sub-menu index="1">
+            <template #title>
+              <el-icon><location /></el-icon>
+            </template>
+            
+            <el-menu-item @click="()=>{textTip = '这里可能会展示游戏 发售日期-各项指标 的时序关系，运用色彩编码、圆圈大小、高度信息等分别编码不同指标'}">
+              时间轴
+            </el-menu-item>
 
-  <RouterView />
+            <el-menu-item @click="()=>{textTip = '这里可能会展示游戏 游戏类别-游戏发售量 的时序关系，计划采用三维模型可视化'}">
+              类别时序分析
+            </el-menu-item>
+          </el-sub-menu>
+
+          <el-sub-menu index="2">
+            <template #title>
+              <el-icon><cloudy /></el-icon>
+            </template>
+            
+            <el-menu-item @click="()=>{textTip = '这里可能会展示不同类别游戏的评论的词云图'}">
+              评论文本可视化
+            </el-menu-item>
+
+            <el-menu-item @click="()=>{textTip = '这里可能会展示游戏不同类别游戏的简介的词云图'}">
+              简介文本可视化
+            </el-menu-item>
+          </el-sub-menu>
+
+        </el-menu>
+      </el-aside>
+      <el-main class="MainContainer">
+        <el-card shadow="hover" style="min-width: 40vw; min-height: 40vh;">
+          {{ textTip }}
+        </el-card>
+      </el-main>
+    </el-container>
+  </RouterView>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
 
-.logo {
+.Container{
   display: block;
-  margin: 0 auto 2rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
-nav {
+.AsideContainer{
+  /* background-color: aqua; */
+  position: fixed;
+  top: 0%;
+  left: 0;
+  width: 5vw;
+  height: 100vh;
+}
+
+.MainContainer{
+  /* background-color: blue; */
+  margin-left: 5vw;
+  margin-top: 0%;
+  width: 95vw;
+  
+}
+
+.Menu{
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+  min-height: 100%;
 }
 </style>

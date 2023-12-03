@@ -1,7 +1,7 @@
-<script setup>
-// 这里写JavaScript
-// 如果你会js的超进化版TypeScript的话
-// 在上方指定 lang="ts" 也就是 <script setup lang="ts">
+<script setup lang="ts">
+defineProps<{
+  msg: string
+}>()
 </script>
 
 <template>
