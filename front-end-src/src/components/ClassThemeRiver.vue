@@ -4,11 +4,11 @@
 	<div class="charts">
 		<div id="ThemeRiverChart" ref="refChart"></div>
 
-		<ClassPie :L="brushL" :R="brushR"  @clickCls="(name)=>clickedCls=name"></ClassPie>
+		<ClassPie :L="brushL" :R="brushR"  @clickCls="(name)=>{clickedCls=name, showDialog=true}"></ClassPie>
 	</div>
 
-	<el-dialog v-model="clickedCls" style="padding: 0%; background-color: rgba(52, 52, 52, 0.1)" draggable :shadow="false" center>
-		<ClassSummaryCloud :cls="clickedCls"></ClassSummaryCloud>
+	<el-dialog v-model="showDialog" style="padding: 0%; background-color: rgba(52, 52, 52, 0.1)" draggable :shadow="false" center>
+		<ClassSummaryCloud :cls="clickedCls" v-if="showDialog"></ClassSummaryCloud>
 	</el-dialog>
 </template>
 
@@ -36,7 +36,9 @@ import ClassSummaryCloud from './ClassSummaryCloud.vue';
 // 这个ref与上方html中同名，会被自动地指向
 const refChart = ref(null);
 
-const clickedCls:string|boolean|null = ref(null)
+const clickedCls = ref("Adventure")
+
+const showDialog = ref(false)
 
 let brushL = ref(0)
 let brushR = ref(100)

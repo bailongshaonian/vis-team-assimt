@@ -105,20 +105,13 @@ function updateWordCloud(genre) {
     }
 }
 
-watch(cls, (oldValue, newValue)=>{
-    console.log(newValue)
-    updateWordCloud(newValue)
-})
+// watch(cls, (oldValue, newValue)=>{
+//     console.log(newValue)
+//     updateWordCloud(newValue)
+// })
 
 onMounted(()=>{
-    if(cls.value)
-    {
-        console.log('cls.value', cls.value)
-        updateWordCloud(cls.value)
-        }
-        
-    else
-        updateWordCloud('Adventure')
+    updateWordCloud(cls.value)
 })
 
 </script>
